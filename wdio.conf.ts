@@ -1,25 +1,15 @@
-import type { Options } from '@wdio/types'
-
-export const config: Options.Testrunner = {
+export const config: WebdriverIO.Config = {
     //
     // ====================
     // Runner Configuration
     // ====================
-    // WebdriverIO supports running e2e tests as well as unit and component tests.
-    runner: 'local',
-    autoCompileOpts: {
-        tsNodeOpts: {
-            project: './tsconfig.json'
-        }
-    },
-    
-    
+    //
     //
     // ==================
     // Specify Test Files
     // ==================
     // Define which test specs should run. The pattern is relative to the directory
-    // of the configuration file being run.
+    // from which `wdio` was called.
     //
     // The specs are defined as an array of spec files (optionally using wildcards
     // that will be expanded). The test for each spec file will be run in a separate
@@ -80,7 +70,7 @@ export const config: Options.Testrunner = {
     // Define all options that are relevant for the WebdriverIO instance here
     //
     // Level of logging verbosity: trace | debug | info | warn | error | silent
-    logLevel: 'info',
+    //logLevel: 'info',
     //
     // Set specific log levels per logger
     // loggers:
@@ -104,7 +94,7 @@ export const config: Options.Testrunner = {
     // with `/`, the base url gets prepended, not including the path portion of your baseUrl.
     // If your `url` parameter starts without a scheme or `/` (like `some/path`), the base url
     // gets prepended directly.
-    baseUrl: 'http://localhost',
+    baseUrl: '',
     //
     // Default timeout for all waitFor* commands.
     waitforTimeout: 10000,
@@ -149,7 +139,7 @@ export const config: Options.Testrunner = {
     // If you are using Cucumber you need to specify the location of your step definitions.
     cucumberOpts: {
         // <string[]> (file/dir) require files before executing features
-        require: ['./test/step-defenitions/*.ts'],
+        require: ['./test/step-definitions/*.ts'],
         // <boolean> show full backtrace for errors
         backtrace: false,
         // <string[]> ("extension:module") require files with the given EXTENSION after requiring MODULE (repeatable)
@@ -158,15 +148,19 @@ export const config: Options.Testrunner = {
         dryRun: false,
         // <boolean> abort the run on first failure
         failFast: false,
+        // <string[]> (type[:path]) specify the output format, optionally supply PATH to redirect formatter output (repeatable)
         format: ['pretty'],
         // <boolean> hide step definition snippets for pending steps
         snippets: true,
         // <boolean> hide source uris
         source: true,
+        // <string[]> (name) specify the profile to use
+        profile: [],
         // <boolean> fail if there are any undefined or pending steps
+        retry: 0,
         strict: false,
         // <string> (expression) only execute the features or scenarios with tags matching the expression
-        tagExpression: '',
+        //tagExpression: '@displays',
         // <number> timeout for step definitions
         timeout: 60000,
         // <boolean> Enable this config to treat undefined definitions as warnings.
@@ -194,19 +188,10 @@ export const config: Options.Testrunner = {
      * @param  {String} cid      capability id (e.g 0-0)
      * @param  {[type]} caps     object containing capabilities for session that will be spawn in the worker
      * @param  {[type]} specs    specs to be run in the worker process
-     * @param  {[type]} args     object that will be merged with the main configuration once worker is initialized
+     * @param  {[type]} args     object that will be merged with the main configuration once worker is initialised
      * @param  {[type]} execArgv list of string arguments passed to the worker process
      */
     // onWorkerStart: function (cid, caps, specs, args, execArgv) {
-    // },
-    /**
-     * Gets executed just after a worker process has exited.
-     * @param  {String} cid      capability id (e.g 0-0)
-     * @param  {Number} exitCode 0 - success, 1 - fail
-     * @param  {[type]} specs    specs to be run in the worker process
-     * @param  {Number} retries  number of retries used
-     */
-    // onWorkerEnd: function (cid, exitCode, specs, retries) {
     // },
     /**
      * Gets executed just before initialising the webdriver session and test framework. It allows you
@@ -246,44 +231,40 @@ export const config: Options.Testrunner = {
     /**
      *
      * Runs before a Cucumber Scenario.
-     * @param {ITestCaseHookParameter} world    world object containing information on pickle and test step
-     * @param {Object}                 context  Cucumber World object
+     * @param {ITestCaseHookParameter} world world object containing information on pickle and test step
      */
-    // beforeScenario: function (world, context) {
+    // beforeScenario: function (world) {
     // },
     /**
      *
      * Runs before a Cucumber Step.
      * @param {Pickle.IPickleStep} step     step data
      * @param {IPickle}            scenario scenario pickle
-     * @param {Object}             context  Cucumber World object
      */
-    // beforeStep: function (step, scenario, context) {
+    // beforeStep: function (step, scenario) {
     // },
     /**
      *
      * Runs after a Cucumber Step.
-     * @param {Pickle.IPickleStep} step             step data
-     * @param {IPickle}            scenario         scenario pickle
-     * @param {Object}             result           results object containing scenario results
-     * @param {boolean}            result.passed    true if scenario has passed
-     * @param {string}             result.error     error stack if scenario failed
-     * @param {number}             result.duration  duration of scenario in milliseconds
-     * @param {Object}             context          Cucumber World object
+     * @param {Pickle.IPickleStep} step     step data
+     * @param {IPickle}            scenario scenario pickle
+     * @param {Object}             result   results object containing scenario results
+     * @param {boolean}            result.passed   true if scenario has passed
+     * @param {string}             result.error    error stack if scenario failed
+     * @param {number}             result.duration duration of scenario in milliseconds
      */
-    // afterStep: function (step, scenario, result, context) {
+    // afterStep: function (step, scenario, result) {
     // },
     /**
      *
-     * Runs after a Cucumber Scenario.
-     * @param {ITestCaseHookParameter} world            world object containing information on pickle and test step
-     * @param {Object}                 result           results object containing scenario results
-     * @param {boolean}                result.passed    true if scenario has passed
-     * @param {string}                 result.error     error stack if scenario failed
-     * @param {number}                 result.duration  duration of scenario in milliseconds
-     * @param {Object}                 context          Cucumber World object
+     * Runs before a Cucumber Scenario.
+     * @param {ITestCaseHookParameter} world  world object containing information on pickle and test step
+     * @param {Object}                 result results object containing scenario results
+     * @param {boolean}                result.passed   true if scenario has passed
+     * @param {string}                 result.error    error stack if scenario failed
+     * @param {number}                 result.duration duration of scenario in milliseconds
      */
-    // afterScenario: function (world, result, context) {
+    // afterScenario: function (world, result) {
     // },
     /**
      *
@@ -335,6 +316,6 @@ export const config: Options.Testrunner = {
     * @param {String} oldSessionId session ID of the old session
     * @param {String} newSessionId session ID of the new session
     */
-    // onReload: function(oldSessionId, newSessionId) {
-    // }
+    //onReload: function(oldSessionId, newSessionId) {
+    //}
 }
