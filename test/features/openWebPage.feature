@@ -1,29 +1,30 @@
 Feature: Open a webpage and interact with products
 
-    Scenario Outline: The webpage is opened
+    # Scenario Outline: The webpage is opened
+    #     Given the following URL is opened: <URL>
+    #     And the user accept cookies
+    #     When the user clicks in <Boton>
+    #     Then the URL contains <Texto URL>
+
+
+    #     Examples:
+    #         | URL         | Boton                    | Texto URL           |
+    #         | 'www.lidl.es' | 'verTodasOfertas' | 'todas-las-ofertas' |
+
+
+
+    Scenario Outline: A especific section is displayed with <Areas> Areas
         Given the following URL is opened: <URL>
         And the user accept cookies
-        When the user clicks in <Boton>
-        Then the URL contains <Texto URL>
-
-
-        Examples:
-            | URL         | Boton                    | Texto URL           |
-            | 'www.lidl.es' | 'verTodasOfertas' | 'todas-las-ofertas' |
-
-
-
-    # Scenario Outline: A especific section is displayed with <Areas> Areas
-    #     Given the following URL is opened: <URL>
-    #     When the user clicks in 'Menu'
-    #      And the user hover in <Category> category
+        When the user clicks in 'menu'
+         And the user hover in <Category> category
     #      And the user clicks in <Section> section
     #     Then the URL contains <Texto URL>
     #      And <Areas> areas are displayed in the section
 
-    #     Examples:
-    #         | URL         | Category    | Section   | Texto URL     | Areas     |
-    #         | www.lidl.es | 'Hogar'     | 'Baño'    | 'bano'        | '4'       |
+        Examples:
+            | URL         | Category    | Section   | Texto URL     | Areas     |
+            | 'www.lidl.es' | 'Hogar'     | 'Baño'    | 'bano'        | '4'       |
 
 
     # Scenario Outline: Add the more expensive product to the cart in black color
