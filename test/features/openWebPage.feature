@@ -3,13 +3,13 @@ Feature: Open a webpage and interact with products
     Scenario Outline: The webpage is opened
         Given the following URL is opened: <URL>
         And the user accept cookies
-        # When the user clicks in <Boton>
-        # Then the URL contains <Texto URL>
+        When the user clicks in <Boton>
+        Then the URL contains <Texto URL>
 
 
         Examples:
             | URL         | Boton                    | Texto URL           |
-            | 'www.lidl.es' | 'Ver_todas_las _ofertas' | 'todas-las-ofertas' |
+            | 'www.lidl.es' | 'verTodasOfertas' | 'todas-las-ofertas' |
 
 
 

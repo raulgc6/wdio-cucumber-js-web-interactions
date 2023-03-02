@@ -1,5 +1,5 @@
 import { Given } from "@wdio/cucumber-framework"
-import { Homepage }  from "../page-objects/homepage.page"
+import homepage  from "../page-objects/homepage.page"
  
 Given ('the following URL is opened: {string}', async  function (url){
     await browser.url(url)
@@ -7,7 +7,5 @@ Given ('the following URL is opened: {string}', async  function (url){
 })
 
 Given ('the user accept cookies', async function (){
-    const homePage = new Homepage()
-    await homePage.acceptCookies.click()
-    await browser.pause(5000);
+    await homepage.acceptCookies.click()
 })

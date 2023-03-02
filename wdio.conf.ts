@@ -1,4 +1,4 @@
-export const config: WebdriverIO.Config = {
+const config: WebdriverIO.Config = {
     //
     // ====================
     // Runner Configuration
@@ -319,3 +319,5 @@ export const config: WebdriverIO.Config = {
     //onReload: function(oldSessionId, newSessionId) {
     //}
 }
+
+exports.config = config
