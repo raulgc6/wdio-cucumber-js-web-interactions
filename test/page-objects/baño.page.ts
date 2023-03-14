@@ -2,7 +2,7 @@ import PropiedadesProducto from "../model/propiedadesProducto"
 
 class Bano{
     get totalProduct  () { return $$('.plp-product-grid-box-tile__wrapper')}
-    //¿como definir el tipo totalProduct para pasarlo a las funciones?
+    //¿como definir el tipo totalProduct para pasarlo a la funcion obtenerpropiedades baño?
 
    async obtenerPropiedadesBaño (){  
     //esto que significa??  (this.totalProduct): Promise<PropiedadesProducto[]> 
@@ -10,7 +10,7 @@ class Bano{
         const totalProductos = this.totalProduct
         const propiedadesBaño : PropiedadesProducto[] = []
         const countOfProducts = await this.totalProduct.length
-        for (let i=0; i<2; i++){  //countOfProducts-1
+        for (let i=0; i<countOfProducts-1; i++){  //
             let elemProp: PropiedadesProducto = new PropiedadesProducto()
             if (this.hasCompraOnline(this.totalProduct[i])){
                 elemProp.TieneCompraOnline=true
