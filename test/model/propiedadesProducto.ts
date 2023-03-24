@@ -1,5 +1,5 @@
 export default class PropiedadesProducto {
-
+public id: string
 private tieneCompraOnline: boolean;
 private tieneCompraTienda: boolean;
 private tieneValoracion: boolean;
