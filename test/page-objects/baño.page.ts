@@ -2,7 +2,7 @@ import PropiedadesProducto from "../model/propiedadesProducto";
 
 class Bano {
   get totalProduct() {
-    return $$(".plp-product-grid-box-tile__wrapper");
+    return $$(".hide-phone .plp-product-grid-box-tile__wrapper");
   }
   //¿como definir el tipo totalProduct para pasarlo a la funcion obtenerpropiedades baño?
 
@@ -25,23 +25,19 @@ class Bano {
   }
 
   async hasCompraOnline(product) {
-    const compraOnline = await product.$(
-      ".hide-phone .pdp-availability-buy-online"
-    );
+    const compraOnline = await product.$(".pdp-availability-buy-online");
     return await compraOnline.isExisting();
   }
   async hasCompraTienda(product) {
-    const compraTienda = await product.$(
-      ".hide-phone .pdp-availability-available-in-store"
-    );
+    const compraTienda =await product.$(".pdp-availability-available-in-store");
     return await compraTienda.isExisting();
   }
   async hasValoracion(product) {
-    const valoracion = await product.$(".hide-phone .ratings");
+    const valoracion = await product.$(".ratings");
     return await valoracion.isExisting();
   }
   async hasDescuento(product) {
-    const descuento = await product.$(".hide-phone .price-height").$("<em>");
+    const descuento = await product.$(".price-height").$("<em>");
     return await descuento.isExisting();
   }
 }

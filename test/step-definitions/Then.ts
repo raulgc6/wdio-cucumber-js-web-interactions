@@ -9,13 +9,8 @@ Then ('the URL contains {string}', async (partialUrl)=>{
 
 Then ('{string} products in store are displayed in the section', async (countProducts)=>{
     const propiedadesBaño: PropiedadesProducto[]  = await bañoPage.obtenerPropiedadesBaño()
-    const total = propiedadesBaño.length
-    let productosTienda = 0
-    for (let i=0; i < total; i++){
-        let producto: PropiedadesProducto = propiedadesBaño[i]
-        if (producto.TieneCompraTienda === true){
-            productosTienda++
-        }
-    }
-    expect(productosTienda).toEqual(Number.parseInt(countProducts))
+    let productosTienda : PropiedadesProducto[] = propiedadesBaño.filter((producto)=>{
+        return producto.TieneCompraTienda === true
+    })  
+    expect(productosTienda.length).toEqual(Number.parseInt(countProducts))
 })
